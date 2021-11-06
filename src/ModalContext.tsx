@@ -37,11 +37,9 @@ export const ModalContext = createContext<IModalContext>({
 export const ModalContextProvider: FC = ({ children }) => {
   const [modalsList, setModalsList] = useState<Array<IModal>>([]);
 
-  const clearModals = () => {
-    setModalsList([]);
-  };
+  const clearModals = useCallback((): void => setModalsList([]), []);
 
-  const openModal: TOpenModalType = (
+  const openModal: TOpenModalType = useCallback((
     newComponent,
     newProps = {},
   ) => {
@@ -52,9 +50,9 @@ export const ModalContextProvider: FC = ({ children }) => {
         props: newProps,
       },
     ]);
-  };
+  }, []);
 
-  const openNextModal: TOpenModalType = (
+  const openNextModal: TOpenModalType = useCallback((
     newComponent,
     newProps = {},
   ) => {
@@ -66,7 +64,7 @@ export const ModalContextProvider: FC = ({ children }) => {
         props: newProps,
       },
     ]);
-  };
+  }, []);
 
   const closeModal = useCallback(() => {
     setModalsList(currentState => (
