@@ -1,0 +1,11 @@
+{
+  "name": "modal-context",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "karolis.krusinskas@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^17.0.2",
+    "typescript": "^4.3.5"
+  }
+}
