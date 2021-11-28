@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "declaration": true,
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "lib": ["ES2015"],
+  },
+  "include": ["./src/ModalContext.tsx"]
+}
