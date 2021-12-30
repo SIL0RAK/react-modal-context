@@ -1,23 +1,21 @@
 import { useContext, createContext, useState, ComponentType, FC, useCallback, useMemo } from 'react';
 
-export interface IComponent extends Record<string, unknown> {
+export interface IModalProps {
   onRequestClose: () => void;
   openModal?: TOpenModalType;
   openNextModal?: TOpenModalType;
+  onRequestCloseAll?: () => void;
 }
 
-export type ModalComponentType = ComponentType<IComponent>
-type ModalComponentPropsType = Record<string, unknown>
-
-export type TOpenModalType = (
-  newComponent: ModalComponentType,
-  newProps?: ModalComponentPropsType
-) => void
+export type TOpenModalType = <T extends IModalProps>(
+  newComponent: ComponentType<T>,
+  newProps?: Omit<T, 'onRequestClose'>,
+) => void;
 
 interface IModal {
   id: number;
-  component: ModalComponentType;
-  props: ModalComponentPropsType;
+  component: ComponentType<IModalProps>;
+  props?: Record<string, unknown>;
 }
 
 interface IModalContext {
@@ -34,6 +32,9 @@ export const ModalContext = createContext<IModalContext>({
   closeAllModals: () => {},
 });
 
+
+export const useModalContext = () => useContext(ModalContext);
+
 export const ModalContextProvider: FC = ({ children }) => {
   const [modalsList, setModalsList] = useState<Array<IModal>>([]);
 
@@ -47,12 +48,12 @@ export const ModalContextProvider: FC = ({ children }) => {
    */
   const openModal: TOpenModalType = useCallback((
     newComponent,
-    newProps = {},
+    newProps,
   ) => {
     setModalsList([
       {
         id: 0,
-        component: newComponent,
+        component: newComponent as ComponentType<IModalProps>,
         props: newProps,
       },
     ]);
@@ -63,13 +64,13 @@ export const ModalContextProvider: FC = ({ children }) => {
    */
   const openNextModal: TOpenModalType = useCallback((
     newComponent,
-    newProps = {},
+    newProps,
   ) => {
-    setModalsList([
-      ...modalsList,
+    setModalsList((list) => [
+      ...list,
       {
-        id: modalsList.length,
-        component: newComponent,
+        id: list.length,
+        component: newComponent as ComponentType<IModalProps>,
         props: newProps,
       },
     ]);
@@ -79,10 +80,13 @@ export const ModalContextProvider: FC = ({ children }) => {
    * Closes currently open modal
    */
   const closeModal = useCallback(() => {
-    setModalsList(currentState => (
-      currentState.filter(modal => modal.id !== currentState.length - 1)
-    ));
+    setModalsList(currentState => {
+      console.log(currentState);
+      return currentState.filter(modal => modal.id !== currentState.length - 1)
+    });
   }, []);
+
+  console.log(modalsList);
 
   const value = useMemo<IModalContext>(() => ({
     openModal,
@@ -100,6 +104,7 @@ export const ModalContextProvider: FC = ({ children }) => {
           openNextModal={openNextModal}
           openModal={openModal}
           onRequestClose={closeModal}
+          onRequestCloseAll={closeAllModals}
           {...props}
         />
       )}
@@ -107,7 +112,5 @@ export const ModalContextProvider: FC = ({ children }) => {
     </ModalContext.Provider>
   );
 };
-
-export const useModalContext = () => useContext(ModalContext);
 
 export default ModalContext;

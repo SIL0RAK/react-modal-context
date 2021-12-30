@@ -11,7 +11,6 @@ This context grans you more control over modals for example:
 
 * [Installation](##Installation)
 * [Documentation](##Documentation)
-* [Demos](##Demos)
 
 ## Installation
 
@@ -54,13 +53,10 @@ const {
 } = useModalContext();
 ```
 
-| Method        | Description |
-| ------------- | ----------- |
-| `openModal`   | Closes(clears) all other modals and open's new modal.                                                          |
+| Method          | Description                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `openModal`     | Closes(clears) all other modals and open's new modal.                                                          |
 | `openNextModal` | opens new modal but leaves old modals in queue so when this modal will be closed previous modal will be shown. |
 | `closeModal`    | closes top modal                                                                                               |
-| `clearModals`   | closes all modals in queue                                                                                     |
-
-
-## Demos
+| `closeAllModals`| closes all modals in queue                                                                                     |
 
