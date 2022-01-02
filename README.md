@@ -1,4 +1,5 @@
 # React modal context
+
 Modal control context made to be used with `react-modal` library.
 This context grans you more control over modals for example:
 
