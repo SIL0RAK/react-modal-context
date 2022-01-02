@@ -18,11 +18,11 @@ This context grans you more control over modals for example:
 you can use npm or yarn
 
 ```bash
-$ npm install react-modal-context
+$ npm install react-modal-ctx
 ```
 
 ```bash
-$ yarn add react-modal-context
+$ yarn add react-modal-ctx
 ```
 
 ## Documentation
@@ -30,7 +30,7 @@ $ yarn add react-modal-context
 ### ModalContextProvider
 
 ```tsx
-import { ModalContextProvider } from 'react-modal-context';
+import { ModalContextProvider } from 'react-modal-ctx';
 
 const App = () => (
   <ModalContextProvider>
@@ -44,7 +44,7 @@ wrapping `Page` component enables you to use `useModalContext` in it.
 ### useModalContext
 
 ```typescript
-import { useModalContext } from 'react-modal-context';
+import { useModalContext } from 'react-modal-ctx';
 
 const {
   openModal,

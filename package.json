@@ -1,5 +1,5 @@
 {
-  "name": "react-modal-context",
+  "name": "react-modal-ctx",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,6 +8,9 @@
   "scripts": {
     "build": "tsc",
     "start:example": "webpack server --config ./examples/webpack.config.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "tags": [
     "react",
@@ -20,7 +23,9 @@
     "react-component",
     "modal",
     "modal management",
-    "context"
+    "context",
+    "react modal context",
+    "functional"
   ],
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
