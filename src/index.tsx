@@ -81,12 +81,9 @@ export const ModalContextProvider: FC = ({ children }) => {
    */
   const closeModal = useCallback(() => {
     setModalsList(currentState => {
-      console.log(currentState);
       return currentState.filter(modal => modal.id !== currentState.length - 1)
     });
   }, []);
-
-  console.log(modalsList);
 
   const value = useMemo<IModalContext>(() => ({
     openModal,
