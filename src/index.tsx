@@ -32,7 +32,6 @@ export const ModalContext = createContext<IModalContext>({
   closeAllModals: () => {},
 });
 
-
 export const useModalContext = () => useContext(ModalContext);
 
 export const ModalContextProvider: FC = ({ children }) => {
@@ -60,7 +59,7 @@ export const ModalContextProvider: FC = ({ children }) => {
   }, []);
 
   /**
-   * Opens new modal and pushes currently open modal to queue.
+   * Opens new modal and pushes currently open modal to stack.
    */
   const openNextModal: TOpenModalType = useCallback((
     newComponent,
